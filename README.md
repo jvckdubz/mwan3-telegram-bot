@@ -26,6 +26,7 @@ cd /root/mwan3bot
 ```
 git clone https://github.com/jvckdubz/mwan3-telegram-bot.git
 ```
+*для создания файлов вручную потребуются только bot.py и event-hook.sh
 
 2. Установите зависимости:
 
