@@ -38,23 +38,6 @@ pip3 install requests
 
 3. В `bot.py` замените `ВАШ_ТОКЕН` и `ВАШ_CHAT_ID` на ваши значения от Telegram-бота.
 
-4. Запустите бота:
-
-```
-python3 bot.py
-```
-Создаем службу:
-```
-nano /etc/init.d/mwan3bot
-```
-Вставляем содержимое файла `etc-init.d-mwan3bot`
-```
-/etc/init.d/mwan3bot enable
-```
-```
-/etc/init.d/mwan3bot start
-```
-
 ## Интеграция с mwan3
 
 Для автоматического уведомления о переключении каналов добавьте следующий код в файл `/etc/mwan3.user`:
@@ -87,6 +70,26 @@ curl "http://localhost:8081/?state=main"
 ```sh
 curl "http://localhost:8081/?state=reserve"
 ```
+
+Запуск бота:
+
+Создаем службу:
+```
+nano /etc/init.d/mwan3bot
+```
+Вставляем содержимое файла `etc-init.d-mwan3bot`
+```
+/etc/init.d/mwan3bot enable
+```
+```
+/etc/init.d/mwan3bot start
+```
+
+Или вручную:
+```
+python3 bot.py
+```
+
 
 ## Файлы
 
