@@ -85,6 +85,6 @@ curl "http://localhost:8081/?state=reserve"
 - `stats.json` — статистика за дни и месяцы (создаётся автоматически)
 - `bot.log` — лог-файл (опционально)
 
-## Лицензия
+## License
 
-MIT
+This project is licensed under the MIT License - see the [LICENSE](./LICENSE) file for details.
