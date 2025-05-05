@@ -43,6 +43,17 @@ pip3 install requests
 ```
 python3 bot.py
 ```
+Создаем службу:
+```
+nano /etc/init.d/mwan3bot
+```
+Вставляем содержимое файла 'etc-init.d-mwan3bot'
+```
+/etc/init.d/mwan3bot enable
+```
+```
+/etc/init.d/mwan3bot start
+```
 
 ## Интеграция с mwan3
 
