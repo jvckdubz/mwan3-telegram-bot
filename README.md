@@ -47,7 +47,7 @@ python3 bot.py
 ```
 nano /etc/init.d/mwan3bot
 ```
-Вставляем содержимое файла 'etc-init.d-mwan3bot'
+Вставляем содержимое файла `etc-init.d-mwan3bot`
 ```
 /etc/init.d/mwan3bot enable
 ```
