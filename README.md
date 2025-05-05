@@ -18,12 +18,14 @@
 1. Клонируйте репозиторий на роутер или сервер:
 
 ```
-git clone https://github.com/your_username/mwan3-telegram-bot.git
+git clone https://github.com/jvckdubz/mwan3-telegram-bot.git
 ```
 
-2. Установите зависимости (только `requests`, если нет):
+2. Установите зависимости:
 
 ```
+opkg update
+opkg install python3 python3-pip ca-bundle
 pip3 install requests
 ```
 
@@ -37,19 +39,36 @@ python3 bot.py
 
 ## Интеграция с mwan3
 
-Добавьте в `/etc/mwan3.user` или в конфигурацию:
+Для автоматического уведомления о переключении каналов добавьте следующий код в файл `/etc/mwan3.user`:
 
 ```sh
-/path/to/event-hook.sh "$ACTION"
+#!/bin/sh
+logger -t mwan3.user "$ACTION interface $INTERFACE"
+
+MAIN_IF="wan"
+RESERVE_IF="wan2"
+
+if [ "$ACTION" = "ifdown" ] && [ "$INTERFACE" = "$MAIN_IF" ]; then
+    /root/mwan3bot/event-hook.sh to_reserve "$RESERVE_IF"
+elif [ "$ACTION" = "ifup" ] && [ "$INTERFACE" = "$MAIN_IF" ]; then
+    /root/mwan3bot/event-hook.sh to_main
+fi
 ```
 
-Или вызовите напрямую:
+Замените `wan` и `wan2` на названия ваших интерфейсов, если они отличаются.
+
+Этот скрипт будет вызываться при смене состояния основного интерфейса и передавать информацию в бота через `event-hook.sh`.
+
+Альтернативно можно вручную вызвать изменение состояния:
 
 ```sh
 curl "http://localhost:8081/?state=main"
 ```
+или
 
-`event-hook.sh` — это простой скрипт, который отправляет новое состояние в бот.
+```sh
+curl "http://localhost:8081/?state=reserve"
+```
 
 ## Файлы
 
