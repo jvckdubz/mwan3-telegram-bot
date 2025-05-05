@@ -1,0 +1,24 @@
+#!/bin/sh /etc/rc.common
+# MWAN3 Telegram Bot Service
+
+START=99
+BOT_DIR="/root/mwan3bot"
+BOT_SCRIPT="bot.py"
+PID_FILE="/var/run/mwan3bot.pid"
+
+start() {
+    echo "Запуск MWAN3 бота..."
+    cd "$BOT_DIR"
+    python3 "$BOT_SCRIPT" &
+    echo $! > "$PID_FILE"
+}
+
+stop() {
+    echo "Остановка MWAN3 бота..."
+    if [ -f "$PID_FILE" ]; then
+        kill "$(cat "$PID_FILE")" 2>/dev/null
+        rm -f "$PID_FILE"
+    else
+        echo "PID-файл не найден, бот может не работать."
+    fi
+}
